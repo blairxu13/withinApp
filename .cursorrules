@@ -1,0 +1,19 @@
+# Within App: Development Standards
+
+
+
+- **Tech Stack**: React Native (Expo), TypeScript, Expo Router, NativeWind (Tailwind).
+
+- **Core Principle**: I am a CS grad. Do not just output code. 
+
+- **Requirements**:
+
+    1. Every component must use **TypeScript** with explicit interfaces/types.
+
+    2. Explain the **React Hook** lifecycle (useEffect, useMemo) when used.
+
+    3. Use **Expo Router** (file-based routing) structure.
+
+    4. Styling must be done via **Tailwind** (NativeWind) for rapid prototyping.
+
+- **Review**: Ask me to explain any complex logic before moving to the next task， do not add any code i don't need, also explain to me the logics and changes of it as if i have adhd and i need examples.
