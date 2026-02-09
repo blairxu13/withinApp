@@ -9,15 +9,17 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jade13.within"
     },
     "android": {
       "edgeToEdgeEnabled": true,
+      "package": "com.jade13.within",
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "static"
     
     },
     "plugins": [
@@ -31,6 +33,10 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "@react-native-google-signin/google-signin",
+        { "iosUrlScheme": "com.googleusercontent.apps.你的ID" }
       ]
     ],
     "experiments": {

@@ -1,8 +1,14 @@
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
+import { onGoogleButtonPress } from '@/services/auth';
 
 export default function LandingScreen() {
   const router = useRouter();
+
+  const handleGoogleSignIn = async () => {
+    await onGoogleButtonPress();
+    router.replace('/(tabs)');
+  };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} className="bg-white dark:bg-black">
@@ -15,13 +21,14 @@ export default function LandingScreen() {
         </Text>
       </Pressable>
 
-      <View
+      <Pressable
+        onPress={handleGoogleSignIn}
         style={{ marginTop: 24, borderWidth: 1, borderColor: '#ccc', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 14 }}
       >
         <Text style={{ fontSize: 16 }} className="text-black dark:text-white">
-          Click here to signup or login
+          Sign in with Google
         </Text>
-      </View>
+      </Pressable>
     </View>
   );
 }
