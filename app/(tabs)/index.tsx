@@ -1,98 +1,60 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
+import { useRouter } from 'expo-router';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+export default function FunctionScreen() {
+  const router = useRouter();
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <View className="flex-1 bg-peach-bg px-[18px] pt-[53px]">
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      {/* Main name header */}
+      <Text className="text-5xl font-black text-black">
+        Hello Jade
+      </Text>
+
+      {/* Function section header */}
+      <Text className="mt-[88px] ml-[11px] text-[15px] font-bold text-black">
+        Function
+      </Text>
+
+      {/* Function boxes row */}
+      <View className="mt-[18px] ml-[11px] flex-row gap-[17px]">
+
+        {/* Function 1 box */}
+        <View className="w-[97px] h-[75px] bg-box-gray rounded-[25px] items-center justify-center">
+          <FontAwesome5 name="star-and-crescent" size={40} color="black" />
+        </View>
+
+        {/* Function 2 box */}
+        <View className="w-[97px] h-[75px] bg-box-mauve rounded-[25px] items-center justify-center">
+          <FontAwesome5 name="yin-yang" size={40} color="black" />
+        </View>
+      </View>
+
+      {/* Folder box */}
+      <View className="mt-[26px] flex-1 bg-box-gray rounded-[15px] p-3">
+
+        {/* Folder header row */}
+        <View className="flex-row justify-between items-start">
+          <Text className="text-[25px] font-bold text-black ml-2">
+            Folder
+          </Text>
+
+          {/* Delete folder circle */}
+          <View className="w-[50px] h-[50px] bg-delete-pink rounded-full" />
+        </View>
+      </View>
+
+      {/* Back to login */}
+      <View className="flex-1 items-center justify-end pb-5">
+        <Pressable
+          onPress={() => router.replace('/')}
+          className="bg-black/15 px-6 py-3 rounded-[10px]"
+        >
+          <Text className="text-sm font-semibold text-black">Back to Login</Text>
+        </Pressable>
+      </View>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
