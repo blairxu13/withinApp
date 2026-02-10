@@ -2,9 +2,15 @@ import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { signOut } from '@/services/auth';
 
 export default function FunctionScreen() {
   const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace('/');
+  };
 
   return (
     <LinearGradient
@@ -56,7 +62,7 @@ export default function FunctionScreen() {
       {/* Back to login */}
       <View className="self-stretch items-center pb-5">
         <Pressable
-          onPress={() => router.replace('/')}
+          onPress={handleSignOut}
           className="bg-black/15 px-6 py-3 rounded-[10px]"
         >
           <Text className="text-sm font-semibold text-black">Back to Login</Text>

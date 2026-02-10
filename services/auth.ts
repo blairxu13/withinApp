@@ -5,7 +5,11 @@ import { supabase } from './supabase';
 // Call this once when the app starts (e.g. in root layout)
 export function configureGoogleSignIn(): void {
   GoogleSignin.configure({
+    // This is for Supabase to verify the user
     webClientId: GOOGLE_WEB_CLIENT_ID,
+    // THIS IS THE MISSING PIECE: The iOS Client ID from Google Console
+    iosClientId: '774533838966-pdiikkfdbv786911r87jj62tkqiigmja.apps.googleusercontent.com',
+    offlineAccess: true,
   });
 }
 
@@ -25,5 +29,14 @@ export async function onGoogleButtonPress(): Promise<void> {
     }
   } catch (error) {
     console.error('Google sign-in error:', error);
+  }
+}
+
+export async function signOut(): Promise<void> {
+  try {
+    await GoogleSignin.signOut();
+    await supabase.auth.signOut();
+  } catch (error) {
+    console.error('Sign out error:', error);
   }
 }

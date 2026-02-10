@@ -4,7 +4,6 @@
     "slug": "within-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    
     "scheme": "withinapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -20,7 +19,6 @@
     "web": {
       "bundler": "metro",
       "output": "static"
-    
     },
     "plugins": [
       "expo-router",
@@ -36,7 +34,10 @@
       ],
       [
         "@react-native-google-signin/google-signin",
-        { "iosUrlScheme": "com.googleusercontent.apps.你的ID" }
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.774533838966-pdiikkfdbv786911r87jj62tkqiigmja",
+          "iosClientId": "774533838966-pdiikkfdbv786911r87jj62tkqiigmja.apps.googleusercontent.com"
+        }
       ]
     ],
     "experiments": {
