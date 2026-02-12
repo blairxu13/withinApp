@@ -1,50 +1,94 @@
-import { View, Text, Pressable } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { signOut } from '@/services/auth';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function FunctionScreen() {
   const router = useRouter();
-
-  const handleSignOut = async () => {
-    await signOut();
-    router.replace('/');
-  };
+  const [showMenu, setShowMenu] = useState<boolean>(false);
 
   return (
-    <LinearGradient
-      colors={['rgba(255, 255, 255, 0.72)', 'rgba(255, 201, 181, 0.61)']}
-      locations={[0.0481, 0.9231]}
-      style={{ flex: 1, flexDirection: 'column', alignItems: 'flex-start', padding: 10, gap: 10 }}
+    <ScrollView
+      className="flex-1 bg-white"
+      contentContainerStyle={{ flexDirection: 'column', alignItems: 'flex-start', padding: 10, gap: 10, paddingBottom: 40 }}
+      showsVerticalScrollIndicator={false}
     >
 
       {/* Main name header */}
-      <Text className="text-5xl font-black text-black mt-[43px]">
+      <Text className="text-3xl font-bold text-black mt-[100px]">
         Hello Jade
       </Text>
 
-      {/* Function section header */}
-      <Text className="mt-[78px] ml-[11px] text-[15px] font-bold text-black">
-        Function
-      </Text>
+      {/* Search bar */}
+      <View className="mt-[30px] self-stretch flex-row items-center bg-gray-100 rounded-full px-4 py-2.5 mx-1">
+        <MaterialIcons name="search" size={22} color="#999" />
+        <TextInput
+          className="flex-1 ml-2 text-[15px] text-gray-800"
+          placeholder="Search..."
+          placeholderTextColor="#999"
+        />
+      </View>
 
       {/* Function boxes row */}
-      <View className="ml-[11px] flex-row gap-[17px]">
+      <View className="mt-[20px] self-stretch flex-row justify-evenly">
 
-        {/* Function 1 box */}
-        <View className="w-[97px] h-[75px] bg-[#FFF9C4] rounded-[25px] items-center justify-center">
-          <FontAwesome5 name="star-and-crescent" size={40} color="#F4C2C2" />
+        {/* Tarot box */}
+        <View className="items-center gap-[6px]">
+          <View className="w-[97px] h-[75px] bg-[#DCEEFB] rounded-[25px] items-center justify-center border border-black" style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 }}>
+            <View className="items-center justify-center">
+              <FontAwesome5 name="star-and-crescent" size={40} color="black" style={{ position: 'absolute' }} />
+              <FontAwesome5 name="star-and-crescent" size={37} color="#F4C2C2" />
+            </View>
+          </View>
+          <Text className="text-[12px] font-semibold text-black">Tarot</Text>
         </View>
 
-        {/* Function 2 box */}
-        <View className="w-[97px] h-[75px] bg-[#FFF9C4] rounded-[25px] items-center justify-center">
-          <FontAwesome5 name="yin-yang" size={40} color="#F4C2C2" />
+        {/* Bazi box */}
+        <Pressable className="items-center gap-[6px]" onPress={() => router.push('/bazi-menu')}>
+          <View className="w-[97px] h-[75px] bg-[#DCEEFB] rounded-[25px] items-center justify-center border border-black" style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 }}>
+            <View className="items-center justify-center">
+              <FontAwesome5 name="yin-yang" size={40} color="black" style={{ position: 'absolute' }} />
+              <FontAwesome5 name="yin-yang" size={37} color="#F4C2C2" />
+            </View>
+          </View>
+          <Text className="text-[12px] font-semibold text-black">Bazi</Text>
+        </Pressable>
+
+        {/* Box 3 */}
+        <View className="items-center gap-[6px]">
+          <View className="w-[97px] h-[75px] bg-[#DCEEFB] rounded-[25px] items-center justify-center border border-black" style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 }}>
+          </View>
+        </View>
+      </View>
+
+      {/* Function boxes row 2 */}
+      <View className="self-stretch flex-row justify-evenly">
+
+        {/* Box 4 */}
+        <View className="items-center gap-[6px]">
+          <View className="w-[97px] h-[75px] bg-[#DCEEFB] rounded-[25px] items-center justify-center border border-black" style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 }}>
+          </View>
+        </View>
+
+        {/* Box 5 */}
+        <View className="items-center gap-[6px]">
+          <View className="w-[97px] h-[75px] bg-[#DCEEFB] rounded-[25px] items-center justify-center border border-black" style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 }}>
+          </View>
+        </View>
+
+        {/* Box 6 */}
+        <View className="items-center gap-[6px]">
+          <View className="w-[97px] h-[75px] bg-[#DCEEFB] rounded-[25px] items-center justify-center border border-black" style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 6, shadowOffset: { width: 0, height: 2 }, elevation: 3 }}>
+          </View>
         </View>
       </View>
 
       {/* Folder box */}
-      <View className="flex-1 self-stretch bg-box-gray rounded-[15px] p-3">
+      <View
+        className="self-stretch bg-[#FFF0F3] border border-[#F8D7E0] rounded-[15px] p-3 mt-[16px] min-h-[300px]"
+        style={{ shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 8, shadowOffset: { width: 0, height: 2 }, elevation: 3 }}
+      >
 
         {/* Folder header row */}
         <View className="flex-row justify-between items-start">
@@ -52,22 +96,32 @@ export default function FunctionScreen() {
             Folder
           </Text>
 
-          {/* Delete folder circle */}
-          <View className="w-[50px] h-[50px] bg-delete-pink rounded-full items-center justify-center">
+          {/* Plus button */}
+          <View className="relative">
+            <Pressable
+              onPress={() => setShowMenu(!showMenu)}
+              className="w-[50px] h-[50px] bg-delete-pink rounded-full items-center justify-center"
+            >
               <FontAwesome5 name="plus" size={30} color="black" />
-            </View>
+            </Pressable>
+
+            {/* Dropdown menu */}
+            {showMenu && (
+              <View
+                className="absolute right-0 top-[55px] rounded-[35px] py-5 px-5 gap-8"
+                style={{ backgroundColor: 'rgba(255,255,255,0.92)', width: 75, shadowColor: '#000', shadowOpacity: 0.12, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 5 }}
+              >
+                <Pressable className="items-center">
+                  <FontAwesome5 name="hourglass" size={32} color="black" />
+                </Pressable>
+                <Pressable className="items-center">
+                  <FontAwesome5 name="book" size={32} color="black" />
+                </Pressable>
+              </View>
+            )}
+          </View>
         </View>
       </View>
-
-      {/* Back to login */}
-      <View className="self-stretch items-center pb-5">
-        <Pressable
-          onPress={handleSignOut}
-          className="bg-black/15 px-6 py-3 rounded-[10px]"
-        >
-          <Text className="text-sm font-semibold text-black">Back to Login</Text>
-        </Pressable>
-      </View>
-    </LinearGradient>
+    </ScrollView>
   );
 }

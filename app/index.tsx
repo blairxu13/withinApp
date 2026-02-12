@@ -1,13 +1,20 @@
-import { View, Text, Pressable } from 'react-native';
+import { signInWithGoogle } from '@/services/auth';
 import { useRouter } from 'expo-router';
-import { onGoogleButtonPress } from '@/services/auth';
+import { useState } from 'react';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 
 export default function LandingScreen() {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleGoogleSignIn = async () => {
-    await onGoogleButtonPress();
-    router.replace('/(tabs)');
+    setLoading(true);
+    const success = await signInWithGoogle();
+    setLoading(false);
+
+    if (success) {
+      router.replace('/(tabs)');
+    }
   };
 
   return (
@@ -23,11 +30,16 @@ export default function LandingScreen() {
 
       <Pressable
         onPress={handleGoogleSignIn}
-        style={{ marginTop: 24, borderWidth: 1, borderColor: '#ccc', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 14 }}
+        disabled={loading}
+        style={{ marginTop: 24, borderWidth: 1, borderColor: '#ccc', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 14, opacity: loading ? 0.5 : 1 }}
       >
-        <Text style={{ fontSize: 16 }} className="text-black dark:text-white">
-          Sign in with Google
-        </Text>
+        {loading ? (
+          <ActivityIndicator color="#000" />
+        ) : (
+          <Text style={{ fontSize: 16 }} className="text-black dark:text-white">
+            Sign in with Google
+          </Text>
+        )}
       </Pressable>
     </View>
   );
