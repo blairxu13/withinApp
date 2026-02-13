@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { supabase } from '@/services/supabase';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
@@ -7,6 +8,31 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 export default function FunctionScreen() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [displayName, setDisplayName] = useState<string>('');
+
+  useEffect(() => {
+    const fetchName = async (): Promise<void> => {
+      // 1. Get the currently logged-in user's ID
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      console.log('Auth user:', user?.id, 'error:', userError?.message);
+      if (!user) return;
+
+      // 2. Query profiles table filtered by that ID
+      const { data: profile, error: profileError } = await supabase
+        .from('user_profiles')
+        .select('user_name')
+        .eq('id', user.id)
+        .single();
+
+      console.log('Profile result:', profile, 'error:', profileError?.message);
+
+      if (profile?.user_name) {
+        setDisplayName(profile.user_name);
+      }
+    };
+
+    fetchName();
+  }, []);
 
   return (
     <ScrollView
@@ -17,7 +43,7 @@ export default function FunctionScreen() {
 
       {/* Main name header */}
       <Text className="text-3xl font-bold text-black mt-[100px]">
-        Hello Jade
+        Hello {displayName || '...'}
       </Text>
 
       {/* Search bar */}

@@ -54,6 +54,7 @@ export async function signInWithGoogle(): Promise<boolean> {
       console.error('No hash fragment in redirect URL');
       return false;
     }
+ 
 
     const params: Record<string, string> = {};
     hashPart.split('&').forEach((pair) => {
@@ -74,7 +75,6 @@ export async function signInWithGoogle(): Promise<boolean> {
       access_token: accessToken,
       refresh_token: refreshToken,
     });
-
     if (sessionError) {
       console.error('Session error:', sessionError.message);
       return false;
